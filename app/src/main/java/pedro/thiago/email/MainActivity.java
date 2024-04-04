@@ -35,21 +35,26 @@ public class MainActivity extends AppCompatActivity {
                 String texto = etTexto.getText().toString();
 
                 Intent i = new Intent(Intent.ACTION_SENDTO);
-                // Criando uma intenção implicita para o android
+                //Criando uma intenção implicita para o android
 
                 i.setData(Uri.parse("mailto:"));
+                //Definindo o tipo de app para pesquisar, no caso de enviar emails
 
                 String[] emails = new String[]{email};
+                //Criando strings com emails
                 i.putExtra(Intent.EXTRA_EMAIL, emails);
                 i.putExtra(Intent.EXTRA_SUBJECT, assunto);
                 i.putExtra(Intent.EXTRA_TEXT, texto);
+                //Enviando os dados de email, assunto e texto para a intenção
 
                 try {
                     startActivity(Intent.createChooser(i, "Escolha o APP"));
+                    //Tentando ativar a intenção pesquisando por apps compativeis para a ação SENDTO
                 }
                 catch (ActivityNotFoundException e){
                     Toast.makeText(MainActivity.this, "Não há nenhum APP que possa realizar essa ação",
                             Toast.LENGTH_LONG).show();
+                            //Mostrando mensagem para avisar que não há nenhum app para a ação
                 }
             }
         });
